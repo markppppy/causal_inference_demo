@@ -26,11 +26,11 @@ def get_propensity_scores(model, data, verbose = False):
     An array of propensity scores.
     '''
     import statsmodels.api as sm
-    glm_binom = sm.formula.glm(formula = model, data = data, family = sm.families.Binomial())
-    result = glm_binom.fit()
-    if verbose:
+    glm_binom = sm.formula.glm(formula = model, data = data, family = sm.families.Binomial())  # 配置模型训练参数 formula 公式字符串、data dataframe格式数据、family 使用模型 Binomial(): 广义线性估计 + 二项式Binomial
+    result = glm_binom.fit()  # 数据拟合模型
+    if verbose:  # 是否输出模型预测结果统计数据
         print(result.summary)
-    return result.fittedvalues
+    return result.fittedvalues  # 返回预测结果值，即倾向性得分
 
 
 def get_matched_data(match_ids, raw_data):
